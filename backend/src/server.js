@@ -11,7 +11,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5001;
 const _dirname = path.resolve();
 
-if(process.env.NODE_ENV == 'DEV'){
+if(process.env.NODE_ENV != 'PRODUCTION'){
     app.use(
         cors({
           origin: "http://localhost:5173",
@@ -23,7 +23,7 @@ app.use(express.json());
 
 app.use("/api/notes", notesRouter);
 
-if (process.env.NODE_ENV === "PROD") {
+if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(_dirname, "../frontend/dist")));
 
   app.use("*", (_, res) => {
